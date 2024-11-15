@@ -1,7 +1,8 @@
 import { useEffect } from "react";
 import Header from "~/components/Header";
 import { getTheme, setTheme } from "~/utils/theme";
-import Button from "~/components/ui/Button";
+import { Routes, Route } from "react-router-dom";
+import PrivateRoute from "./components/PrivateRoute";
 
 function App() {
   useEffect(() => {
@@ -10,19 +11,15 @@ function App() {
   return (
     <div>
       <Header />
-      {/* <Ranking /> */}
-      <Button color="success" size="lg">
-        primary button
-      </Button>
-      <Button variant="danger">Danger button</Button>
-      <Button variant="success">Success button</Button>
-      <Button variant="warning">Warning button</Button>
-      <Button variant="info">Info button</Button>
-      <Button variant="neutral">neutral button</Button>
-      <Button variant="secondary">secondary button</Button>
-      <Button variant="accent">btn-accent button</Button>
+      <Routes>
+        <Route path="/" exact element={<div>Home Component here</div>} />
+        <Route path="/page" exact element={<div>Another page here</div>} />
 
-      <button className="btn btn-info">Accent</button>
+        <Route element={<PrivateRoute />}>
+          {/* =======================================Protected Routes================================== */}
+        </Route>
+        <Route path="*" element={<div>404 Component here</div>} />
+      </Routes>
     </div>
   );
 }
